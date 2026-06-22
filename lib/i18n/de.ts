@@ -10,8 +10,8 @@ export const de: Dict = {
     menuClose: "Menü schließen",
   },
   hero: {
-    line1: "Alles dahinter.",
-    line2: "Eine Schiene.",
+    line1: "Ein System.",
+    line2: "Alle Leistungen.",
     cta: "Apotheke anschließen",
   },
   position: {
