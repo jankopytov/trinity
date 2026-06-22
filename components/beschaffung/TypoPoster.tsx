@@ -2,14 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
+import { useT } from "@/lib/i18n";
 
-export interface PosterLine {
-  text: string;
-  gradient?: boolean;
-}
-
-export default function TypoPoster({ lines }: { lines: PosterLine[] }) {
+export default function TypoPoster({ which }: { which: "poster1" | "poster2" }) {
   const ref = useRef<HTMLElement>(null);
+  const t = useT();
+  const lines = t.beschaffung[which];
 
   useEffect(() => {
     const reduce = window.matchMedia(

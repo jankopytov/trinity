@@ -2,9 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
+import { useT } from "@/lib/i18n";
 
 export default function BeschaffungHero() {
   const railRef = useRef<HTMLDivElement>(null);
+  const t = useT();
 
   useEffect(() => {
     const reduce = window.matchMedia(
@@ -50,7 +52,7 @@ export default function BeschaffungHero() {
           margin: 0,
         }}
       >
-        Zusätzliche Erträge — ohne Ihr Tagesgeschäft zu verändern.
+        {t.beschaffung.heroTitle}
       </h1>
       <p
         style={{
@@ -61,7 +63,7 @@ export default function BeschaffungHero() {
           color: "var(--engine-ink-2)",
         }}
       >
-        Sie betreiben Ihre Apotheke wie gewohnt. Alles andere übernehmen wir.
+        {t.beschaffung.heroSub}
       </p>
 
       {/* The Motor: a glowing teal→indigo rail beneath the calm copy. */}

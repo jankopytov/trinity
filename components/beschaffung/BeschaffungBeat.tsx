@@ -2,23 +2,22 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
+import { useT } from "@/lib/i18n";
 
 interface BeschaffungBeatProps {
-  n: string;
-  title: string;
-  body: string;
+  index: number; // 0..4 — looks up copy in t.beschaffung.beats
   reverse?: boolean;
   children: React.ReactNode; // the bespoke graphic
 }
 
 export default function BeschaffungBeat({
-  n,
-  title,
-  body,
+  index,
   reverse = false,
   children,
 }: BeschaffungBeatProps) {
   const rootRef = useRef<HTMLElement>(null);
+  const t = useT();
+  const { n, title, body } = t.beschaffung.beats[index];
 
   useEffect(() => {
     const reduce = window.matchMedia(

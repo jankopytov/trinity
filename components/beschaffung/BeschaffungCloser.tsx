@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
+import { useT } from "@/lib/i18n";
 
 export default function BeschaffungCloser() {
   const ref = useRef<HTMLElement>(null);
+  const t = useT();
 
   useEffect(() => {
     const reduce = window.matchMedia(
@@ -61,7 +63,7 @@ export default function BeschaffungCloser() {
           margin: "0 0 2.5rem",
         }}
       >
-        Ihre Großhandelsanbindung. Endlich genutzt.
+        {t.beschaffung.closerLine}
       </p>
       <Link
         href="/kontakt"
@@ -77,7 +79,7 @@ export default function BeschaffungCloser() {
           textDecoration: "none",
         }}
       >
-        Unverbindlich prüfen lassen
+        {t.beschaffung.closerCta}
       </Link>
     </section>
   );

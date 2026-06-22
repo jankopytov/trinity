@@ -213,6 +213,25 @@ export const en: Dict = {
     endLine: "Bring this infrastructure into your pharmacy.",
     endCta: "Connect your pharmacy",
   },
+  beschaffung: {
+    heroTitle: "Additional revenue — without changing your day-to-day.",
+    heroSub: "You run your pharmacy as usual. We handle everything else.",
+    beats: [
+      { n: "01", title: "The connection", body: "We set up your MSV3 interface — the compliant link between wholesaler and pharmacy. No cost, no lock-in, full service." },
+      { n: "02", title: "The engine runs", body: "Order processing, dispatch notices and confirmations — automated and compliant, in the background of your normal operations." },
+      { n: "03", title: "Trinity Buyer", body: "When stock runs short, the Trinity Buyer queries suppliers automatically around the clock — and orders the moment goods are available. Even overnight." },
+      { n: "04", title: "The expertise", body: "Procurement routes, pricing structures and availability — national and international. We head off shortages and safeguard supply reliability." },
+      { n: "05", title: "The result", body: "Recurring revenue in the Rx segment — with no operational effort, no extra staff, no warehouse space." },
+    ],
+    poster1: [{ text: "No effort." }, { text: "No staff." }, { text: "No warehouse space." }],
+    poster2: [{ text: "No cost." }, { text: "No lock-in." }, { text: "Just results.", gradient: true }],
+    closerLine: "Your wholesale connection. Finally put to use.",
+    closerCta: "Get a no-obligation review",
+    gOrder: "ORDER →",
+    gDelivery: "← DELIVERY",
+    gAvailableOrdered: "available → ordered",
+    gRecurringRevenue: "RECURRING REVENUE",
+  },
   legal: {
     nonBinding: "This is a non-binding English translation. The German version is legally authoritative.",
     impressum: {

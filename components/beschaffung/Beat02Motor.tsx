@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { attachPointerParallax } from "@/components/beschaffung/pointerParallax";
+import { useT } from "@/lib/i18n";
 
 // depth layers: far (small/blurred/slow) → near (big/crisp/fast)
 const LAYERS = [
@@ -13,6 +14,7 @@ const LAYERS = [
 
 export default function Beat02Motor() {
   const ref = useRef<SVGSVGElement>(null);
+  const t = useT();
 
   useEffect(() => {
     const reduce = window.matchMedia(
@@ -136,7 +138,7 @@ export default function Beat02Motor() {
     );
 
   return (
-    <svg ref={ref} viewBox="0 0 480 360" role="img" aria-label="Der Motor">
+    <svg ref={ref} viewBox="0 0 480 360" role="img" aria-label={t.beschaffung.beats[1].title}>
       <defs>
         <linearGradient id="b2-rail" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stopColor="var(--teal)" />
@@ -161,10 +163,10 @@ export default function Beat02Motor() {
       </defs>
 
       <text x="22" y="118" fill="var(--engine-ink-2)" fontFamily="var(--font-mono), monospace" fontSize="11" letterSpacing="2">
-        BESTELLUNG →
+        {t.beschaffung.gOrder}
       </text>
       <text x="458" y="262" textAnchor="end" fill="var(--engine-ink-2)" fontFamily="var(--font-mono), monospace" fontSize="11" letterSpacing="2">
-        ← LIEFERUNG
+        {t.beschaffung.gDelivery}
       </text>
 
       {/* the rail + a faint travelling pulse along it */}

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { attachPointerParallax } from "@/components/beschaffung/pointerParallax";
+import { useT } from "@/lib/i18n";
 
 const ROWS = [
   { y: 44, code: "RX-4821", extra: false },
@@ -18,6 +19,7 @@ const MUTED = "#6e5a5a"; // muted reject tone (not alarming)
 
 export default function Beat03TrinityBuyer() {
   const ref = useRef<SVGSVGElement>(null);
+  const t = useT();
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -184,7 +186,7 @@ export default function Beat03TrinityBuyer() {
           <>
             <rect className="b3-loadbar" x="20" y={r.y + 27} width="440" height="2" rx="1" fill="var(--teal)" opacity="0" />
             <path className="b3-tick" d="M392 15 l5 5 l9 -11" transform={`translate(0 ${r.y})`} fill="none" stroke="#15C2AB" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-            <text className="b3-hot-label" x="382" y={r.y + 19} textAnchor="end" fill="var(--teal)" fontFamily="var(--font-mono), monospace" fontSize="10" letterSpacing="1">verfügbar → bestellt</text>
+            <text className="b3-hot-label" x="382" y={r.y + 19} textAnchor="end" fill="var(--teal)" fontFamily="var(--font-mono), monospace" fontSize="10" letterSpacing="1">{t.beschaffung.gAvailableOrdered}</text>
           </>
         ) : (
           <rect x="380" y={r.y + 11} width="60" height="7" rx="3.5" fill="#1c2a3a" />

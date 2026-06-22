@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { attachPointerParallax } from "@/components/beschaffung/pointerParallax";
+import { useT } from "@/lib/i18n";
 
 const CENTER = { x: 240, y: 184 };
 // ordered near → far (national → international). extra → dropped on mobile.
@@ -25,6 +26,7 @@ const DEPTH: Record<number, { r: number; op: number; blur: number }> = {
 
 export default function Beat04Expertise() {
   const ref = useRef<SVGSVGElement>(null);
+  const t = useT();
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -149,7 +151,7 @@ export default function Beat04Expertise() {
   }, []);
 
   return (
-    <svg ref={ref} viewBox="0 0 480 360" role="img" aria-label="Die Expertise">
+    <svg ref={ref} viewBox="0 0 480 360" role="img" aria-label={t.beschaffung.beats[3].title}>
       <defs>
         <linearGradient id="b4-grad" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="var(--teal)" />

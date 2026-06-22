@@ -14,7 +14,10 @@ import Schiene from "@/components/beschaffung/Schiene";
 import LiquidBackground from "@/components/LiquidBackground";
 
 export const metadata: Metadata = {
-  title: "Beschaffung — Trinity Pharma",
+  title: "Beschaffung",
+  description:
+    "Zusätzliche Rx-Erträge über Ihre Großhandelsanbindung — MSV3, Trinity Buyer und Beschaffung, vollautomatisch und ohne Aufwand auf Ihrer Seite.",
+  alternates: { canonical: "/beschaffung" },
 };
 
 const graphics = [
@@ -47,44 +50,20 @@ export default function BeschaffungPage() {
         <BeschaffungHero />
 
         {beschaffungBeats.slice(0, 3).map((beat, i) => (
-          <BeschaffungBeat
-            key={beat.n}
-            n={beat.n}
-            title={beat.title}
-            body={beat.body}
-            reverse={i % 2 === 1}
-          >
+          <BeschaffungBeat key={beat.n} index={i} reverse={i % 2 === 1}>
             {graphics[i]}
           </BeschaffungBeat>
         ))}
 
-        <TypoPoster
-          lines={[
-            { text: "Ohne Aufwand." },
-            { text: "Ohne Personal." },
-            { text: "Ohne Lagerfläche." },
-          ]}
-        />
+        <TypoPoster which="poster1" />
 
         {beschaffungBeats.slice(3, 5).map((beat, i) => (
-          <BeschaffungBeat
-            key={beat.n}
-            n={beat.n}
-            title={beat.title}
-            body={beat.body}
-            reverse={(i + 3) % 2 === 1}
-          >
+          <BeschaffungBeat key={beat.n} index={i + 3} reverse={(i + 3) % 2 === 1}>
             {graphics[i + 3]}
           </BeschaffungBeat>
         ))}
 
-        <TypoPoster
-          lines={[
-            { text: "Keine Kosten." },
-            { text: "Keine Bindung." },
-            { text: "Nur Ergebnis.", gradient: true },
-          ]}
-        />
+        <TypoPoster which="poster2" />
 
         <BeschaffungCloser />
       </div>

@@ -35,6 +35,17 @@ export interface BeatText {
   metricLabel: string;
 }
 
+export interface BeschaffungBeatText {
+  n: string;
+  title: string;
+  body: string;
+}
+
+export interface PosterLineText {
+  text: string;
+  gradient?: boolean;
+}
+
 export interface LegalLine {
   /** optional mono label shown before the value (e.g. "Kontakt") */
   label?: string;
@@ -116,6 +127,20 @@ export interface Dict {
   };
   intents: Record<string, IntentText>;
   cannabis: { beats: BeatText[]; endLine: string; endCta: string };
+  beschaffung: {
+    heroTitle: string;
+    heroSub: string;
+    beats: BeschaffungBeatText[];
+    poster1: PosterLineText[];
+    poster2: PosterLineText[];
+    closerLine: string;
+    closerCta: string;
+    // in-graphic labels
+    gOrder: string;
+    gDelivery: string;
+    gAvailableOrdered: string;
+    gRecurringRevenue: string;
+  };
   legal: {
     /** EN only: the non-binding-translation notice; "" in DE */
     nonBinding: string;

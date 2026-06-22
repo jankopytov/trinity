@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { attachPointerParallax } from "@/components/beschaffung/pointerParallax";
+import { useT } from "@/lib/i18n";
 
 const BASE = 300; // baseline for the bars
 const SURFACE = 200;
@@ -18,6 +19,7 @@ const BARS = [
 
 export default function Beat05Ergebnis() {
   const ref = useRef<SVGSVGElement>(null);
+  const t = useT();
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -123,7 +125,7 @@ export default function Beat05Ergebnis() {
   }, []);
 
   return (
-    <svg ref={ref} viewBox="0 0 480 360" role="img" aria-label="Das Ergebnis">
+    <svg ref={ref} viewBox="0 0 480 360" role="img" aria-label={t.beschaffung.beats[4].title}>
       <defs>
         <linearGradient id="b5-bar" x1="0" y1="1" x2="0" y2="0">
           <stop offset="0%" stopColor="var(--teal)" />
@@ -135,7 +137,7 @@ export default function Beat05Ergebnis() {
       </defs>
 
       <text x="20" y="32" fill="var(--engine-ink-2)" fontFamily="var(--font-mono), monospace" fontSize="11" letterSpacing="2">
-        WIEDERKEHRENDE ERTRÄGE
+        {t.beschaffung.gRecurringRevenue}
       </text>
 
       {/* machine layer */}

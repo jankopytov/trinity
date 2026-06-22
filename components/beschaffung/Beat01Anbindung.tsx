@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { attachPointerParallax } from "@/components/beschaffung/pointerParallax";
+import { useT } from "@/lib/i18n";
 
 const ROWS = [83, 113, 143, 173];
 const ACTIVE_ROW = 2; // ends full teal
@@ -10,6 +11,7 @@ const DOTS = [80, 92, 104];
 
 export default function Beat01Anbindung() {
   const ref = useRef<SVGSVGElement>(null);
+  const t = useT();
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -161,7 +163,7 @@ export default function Beat01Anbindung() {
   }, []);
 
   return (
-    <svg ref={ref} viewBox="0 0 480 360" role="img" aria-label="Anbindung">
+    <svg ref={ref} viewBox="0 0 480 360" role="img" aria-label={t.beschaffung.beats[0].title}>
       <defs>
         <linearGradient id="b1-conn" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="var(--teal)" />
