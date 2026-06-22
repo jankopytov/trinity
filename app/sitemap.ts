@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const BASE = "https://trinity-pharma-brown.vercel.app";
+import { SITE_URL as BASE } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();

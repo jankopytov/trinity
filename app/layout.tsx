@@ -19,9 +19,10 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-// No custom domain is attached to the project, so the production vercel alias
-// is the canonical origin (drives absolute OG image URLs for link unfurls).
-export const SITE_URL = "https://trinity-pharma-brown.vercel.app";
+// Canonical origin — resolves from env (Vercel) so the repo is portable across
+// deployments; drives absolute OG image URLs for link unfurls.
+export { SITE_URL } from "@/lib/site";
+import { SITE_URL } from "@/lib/site";
 const DEFAULT_TITLE =
   "Trinity Pharma — Die Infrastruktur, an der die Apotheken Deutschlands hängen.";
 const DEFAULT_DESC =
