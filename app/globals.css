@@ -1,26 +1,1216 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light "paper" palette */
+  --paper: #F1F4F6;
+  --paper-raise: #FFFFFF;
+  --ink: #0C1A28;
+  --ink-2: #5C6B77;
+  --ink-3: #9AA7B1;
+
+  /* Dark "engine" palette */
+  --engine: #060B14;
+  --engine-raise: #0C1623;
+  --engine-ink: #E8EEF2;
+  --engine-ink-2: #8FA1B0;
+
+  /* Brand accents */
+  --teal: #15C2AB;
+  --indigo: #3A2EBE;
+  --accent: linear-gradient(135deg, var(--teal), var(--indigo));
+
+  /* Motion + layout */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 1s;
+  --gutter: 7.5vw;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-paper-raise: var(--paper-raise);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-engine: var(--engine);
+  --color-engine-raise: var(--engine-raise);
+  --color-engine-ink: var(--engine-ink);
+  --color-engine-ink-2: var(--engine-ink-2);
+  --color-teal: var(--teal);
+  --color-indigo: var(--indigo);
+
+  /* Wired to the next/font CSS vars set on <html> in layout.tsx */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--paper);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Flip a section/page into the dark "engine" palette */
+.engine {
+  background: var(--engine);
+  color: var(--engine-ink);
+}
+
+/* ------------------------------------------------------------------ *
+ * Reusable glass utilities (frosted, subtle — use sparingly).
+ * ------------------------------------------------------------------ */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  backdrop-filter: blur(14px) saturate(120%);
+  border-radius: 16px;
+}
+/* light surface variant (over --paper) */
+.glass-panel--light {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(12, 26, 40, 0.06);
+  -webkit-backdrop-filter: blur(12px) saturate(115%);
+  backdrop-filter: blur(12px) saturate(115%);
+}
+.glass-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.7rem 1.1rem 0.7rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
+}
+
+/* /system map — desktop interactive vs. mobile stacked list */
+.sys-desktop {
+  display: none;
+}
+.sys-mobile {
+  display: block;
+}
+@media (min-width: 880px) and (hover: hover) {
+  .sys-desktop {
+    display: block;
+  }
+  .sys-mobile {
+    display: none;
+  }
+}
+
+/* de/en language pill — sliding teal→indigo indicator. Track is clearly
+   visible (bordered + filled) so it reads as a control on both the frosted
+   nav bar and the dark burger overlay. */
+.lang-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, currentColor 45%, transparent);
+  background: color-mix(in srgb, currentColor 14%, transparent);
+  font-family: var(--font-mono), monospace;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.lang-toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: calc((100% - 6px) / 2);
+  height: calc(100% - 6px);
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 14px 1px rgba(21, 194, 171, 0.55);
+  transition: transform 0.3s var(--ease);
+  pointer-events: none;
+}
+.lang-toggle-btn {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 0;
+  min-width: 2.4em;
+  padding: 0.34rem 0.6rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: color-mix(in srgb, currentColor 78%, transparent);
+  transition: color 0.3s var(--ease);
+}
+.lang-toggle-btn.is-active {
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(6, 11, 20, 0.4);
+}
+.lang-toggle-btn:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+  border-radius: 999px;
+}
+/* mobile (burger overlay) — bigger, fully-filled track. Always on the dark
+   glass overlay, so use explicit light values (not currentColor, which is the
+   dark ink there and would vanish against the overlay). */
+.lang-toggle--lg {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+}
+.lang-toggle--lg .lang-toggle-btn {
+  font-size: 0.92rem;
+  padding: 0.65rem 1.4rem;
+  min-width: 3.2em;
+  color: rgba(255, 255, 255, 0.72); /* inactive: legible on the dark overlay */
+}
+.lang-toggle--lg .lang-toggle-btn.is-active {
+  color: #ffffff; /* active: full white on the teal→indigo thumb */
+}
+@media (prefers-reduced-motion: reduce) {
+  .lang-toggle-thumb {
+    transition: none;
+  }
+}
+
+.sys-penrose-inner {
+  display: block;
+}
+.sys-node:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 6px;
+  border-radius: 50%;
+}
+
+/* /system — center card modal (click to expand) */
+.sys-card-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gutter);
+  background: rgba(6, 11, 20, 0.32);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  animation: sys-fade 0.3s var(--ease);
+}
+.sys-card {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  max-height: 86dvh;
+  overflow-y: auto;
+  padding: 2.25rem;
+  border-radius: 18px;
+  animation: sys-pop 0.4s var(--ease);
+}
+.sys-card-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(12, 26, 40, 0.12);
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--ink-2);
+  cursor: pointer;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+@keyframes sys-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes sys-pop {
+  from { opacity: 0; transform: scale(0.94) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sys-card-backdrop,
+  .sys-card {
+    animation: none;
+  }
+}
+
+/* /system overview table — clean, hairline, stacks on mobile */
+.sys-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.sys-table th {
+  font-family: var(--font-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  text-align: left;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--ink-3);
+}
+.sys-table th.sys-col,
+.sys-table td.sys-col {
+  text-align: center;
+  width: 22%;
+}
+.sys-table td {
+  padding: 1rem;
+  color: var(--ink);
+  border-bottom: 1px solid rgba(12, 26, 40, 0.08);
+}
+.sys-table .sys-check {
+  color: var(--teal);
+}
+.sys-table .sys-dash {
+  color: var(--ink-3);
+}
+@media (max-width: 639px) {
+  .sys-table thead {
+    display: none;
+  }
+  .sys-table,
+  .sys-table tbody,
+  .sys-table tr,
+  .sys-table td {
+    display: block;
+    width: 100%;
+  }
+  .sys-table tr {
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--ink-3);
+  }
+  .sys-table td {
+    padding: 0.3rem 0;
+    border: none;
+  }
+  .sys-table td.sys-col {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    width: 100%;
+  }
+  .sys-table td.sys-col::before {
+    content: attr(data-label);
+    font-family: var(--font-mono), monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.66rem;
+    color: var(--ink-2);
+  }
+  .sys-table td.sys-leistung {
+    font-weight: 500;
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Nav — frosted glass, see-through, futuristic.
+ * Light-frosted on every solid route so the dark --ink logo always reads.
+ * (A dark page would ideally use a light logo variant for a dark-frosted
+ *  nav — not built yet.)
+ * ------------------------------------------------------------------ */
+.tp-nav {
+  position: fixed;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background 0.4s var(--ease),
+    backdrop-filter 0.4s var(--ease),
+    -webkit-backdrop-filter 0.4s var(--ease),
+    border-color 0.4s var(--ease),
+    opacity 0.4s var(--ease);
+}
+.tp-nav--solid {
+  background: rgba(241, 244, 246, 0.62);
+  -webkit-backdrop-filter: blur(18px) saturate(125%);
+  backdrop-filter: blur(18px) saturate(125%);
+}
+/* subtle inner top highlight — a glass edge */
+.tp-nav--solid::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+}
+/* faint teal→indigo gradient hairline at the bottom */
+.tp-nav--solid::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(21, 194, 171, 0.45),
+    rgba(58, 46, 190, 0.45),
+    transparent
+  );
+  pointer-events: none;
+}
+/* ------------------------------------------------------------------ *
+ * /kontakt — form + two-column layout
+ * ------------------------------------------------------------------ */
+.kontakt-cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+@media (min-width: 860px) {
+  .kontakt-cols {
+    grid-template-columns: 1.35fr 0.65fr;
+    gap: 5rem;
+  }
+}
+.kf-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.kf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.kf-label {
+  font-family: var(--font-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.66rem;
+  color: var(--ink-2);
+}
+.kf-label .kf-req {
+  color: var(--teal);
+}
+.kf-input {
+  width: 100%;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 1rem;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(12, 26, 40, 0.14);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.kf-input::placeholder {
+  color: var(--ink-3);
+}
+.kf-input:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(21, 194, 171, 0.18);
+}
+.kf-input[aria-invalid="true"] {
+  border-color: #c0566a;
+}
+.kf-err {
+  font-size: 0.78rem;
+  color: #c0566a;
+}
+/* honeypot — hidden from humans, off-screen + aria-hidden */
+.kf-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+/* contact page — intent headline/subtitle dezent fade+slide on load */
+.kv-intro {
+  animation: kv-in 0.7s var(--ease) both;
+}
+.kv-intro--2 {
+  animation-delay: 0.07s;
+}
+.kv-intro--3 {
+  animation-delay: 0.14s;
+}
+@keyframes kv-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.kv-direct-link {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 1.1rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--teal);
+  padding-bottom: 2px;
+}
+.kv-direct-link:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .kv-intro,
+  .kv-intro--2,
+  .kv-intro--3 {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * /cannabis — scroll-scrub story (dark, bright footage)
+ * ------------------------------------------------------------------ */
+.cs-root {
+  position: relative;
+  background: var(--engine);
+  color: var(--engine-ink);
+  overflow-x: clip;
+}
+/* End CTA after beat 06 — on the dark engine surface */
+.cs-end {
+  position: relative;
+  background: var(--engine);
+  color: var(--engine-ink);
+  text-align: center;
+  padding: 12vh var(--gutter) 15vh;
+  overflow-x: clip;
+}
+.cs-end-line {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 250;
+  font-size: clamp(22px, 3.4vw, 40px);
+  letter-spacing: -0.015em;
+  line-height: 1.18;
+  color: var(--engine-ink);
+  max-width: 22ch;
+  margin: 0 auto 2.5rem;
+}
+.cs-end-cta {
+  display: inline-block;
+  background: var(--indigo);
+  color: #ffffff;
+  padding: 0.95rem 2rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+.cs-end-cta:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .cs-end-cta {
+    display: block;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    padding: 1.05rem 2rem;
+  }
+}
+.cs-beat {
+  position: relative;
+}
+.cs-pin {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+.cs-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.cs-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+.cs-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(6, 11, 20, 0.88), rgba(6, 11, 20, 0.12) 46%, transparent 66%);
+  pointer-events: none;
+}
+.cs-overlay {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: clamp(3rem, 9vh, 6.5rem);
+  z-index: 2;
+  max-width: 24ch;
+}
+.cs-eyebrow {
+  display: block;
+  font-family: var(--font-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  color: var(--engine-ink-2);
+  margin-bottom: 1rem;
+}
+.cs-headline {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 250;
+  font-size: clamp(34px, 5.5vw, 78px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: #f1f4f6;
+  margin: 0;
+}
+.cs-accent {
+  background: var(--accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.cs-sub {
+  margin: 1.25rem 0 0;
+  max-width: 40ch;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.5;
+  color: rgba(241, 244, 246, 0.82);
+}
+.cs-metric {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+.cs-metric-num {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 200;
+  font-size: clamp(44px, 6vw, 84px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #f1f4f6;
+}
+.cs-metric-label {
+  font-family: var(--font-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  color: var(--engine-ink-2);
+}
+/* progress rail / Schiene — fixed on the right edge */
+.cs-rail {
+  position: fixed;
+  top: 18vh;
+  bottom: 18vh;
+  right: clamp(0.6rem, 2vw, 1.6rem);
+  width: 2px;
+  z-index: 30;
+  pointer-events: none;
+  background: rgba(143, 161, 176, 0.18);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.cs-rail-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+.cs-rail-pulse {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 8px 1px rgba(21, 194, 171, 0.7);
+  opacity: 0;
+}
+
+/* MOBILE / touch: photo-essay (no canvas scrub), stacked */
+@media (max-width: 767px), (hover: none) {
+  .cs-canvas {
+    display: none;
+  }
+  .cs-photo {
+    display: block;
+  }
+  .cs-pin {
+    height: 78vh;
+    height: 78dvh;
+  }
+  .cs-rail {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Cinematic full-bleed band (parallax photo).
+ * ------------------------------------------------------------------ */
+.cband {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 60vh;
+  overflow: hidden;
+  /* fallback if the photo isn't dropped in yet — a branded dark band */
+  background: linear-gradient(135deg, var(--engine), var(--engine-raise));
+}
+@media (min-width: 768px) {
+  .cband {
+    height: 80vh;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Network marquee — slow, seamless, edge-faded. Minimal framing.
+ * ------------------------------------------------------------------ */
+.nm-section {
+  position: relative;
+  z-index: 1;
+  padding-block: 4rem;
+}
+@media (min-width: 768px) {
+  .nm-section {
+    padding-block: 5.5rem;
+  }
+}
+.nm-eyebrow {
+  text-align: center;
+  font-family: var(--font-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.7rem;
+  color: var(--ink-3);
+  margin: 0 0 1.75rem;
+}
+.nm-mask {
+  overflow: hidden;
+  /* emerge/vanish into --paper at both edges (mask, not hard cut) */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.nm-track {
+  display: flex;
+  width: max-content;
+  animation: nm-scroll 36s linear infinite; /* constant, no easing */
+  will-change: transform;
+}
+.nm-group {
+  display: flex;
+  align-items: center;
+}
+.nm-item {
+  display: inline-flex;
+  align-items: center;
+}
+.nm-word {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(17px, 2.4vw, 23px);
+  letter-spacing: -0.01em;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.nm-logo {
+  height: 28px;
+  width: auto;
+  /* normalize 7 different brands to one ink-grey tone that sits on --paper */
+  filter: grayscale(1) brightness(0.45) contrast(1.05);
+  opacity: 0.72;
+}
+.nm-dot {
+  flex: none;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.7;
+  margin: 0 clamp(1.4rem, 4vw, 3rem);
+}
+@keyframes nm-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nm-track {
+    animation: none;
+    transform: none;
+    width: 100%;
+    justify-content: center;
+  }
+  .nm-dup {
+    display: none;
+  }
+}
+
+/* ---- mobile nav: burger + full-screen overlay (inline row stops fitting ~1032px) ---- */
+.tp-nav-inline {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+.tp-burger {
+  display: none;
+  position: relative;
+  width: 30px;
+  height: 22px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.tp-logo-mark {
+  display: none;
+}
+@media (max-width: 1040px) {
+  .tp-nav-inline {
+    display: none;
+  }
+  .tp-burger {
+    display: inline-block;
+  }
+}
+@media (max-width: 380px) {
+  .tp-logo-full {
+    display: none;
+  }
+  .tp-logo-mark {
+    display: block;
+  }
+}
+.tp-burger-line {
+  position: absolute;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ink);
+  transition:
+    transform 0.4s var(--ease),
+    opacity 0.25s var(--ease),
+    background-color 0.3s var(--ease);
+}
+.tp-burger-line:nth-child(1) {
+  top: 2px;
+}
+.tp-burger-line:nth-child(2) {
+  top: 10px;
+}
+.tp-burger-line:nth-child(3) {
+  top: 18px;
+}
+.tp-burger.is-open .tp-burger-line {
+  background: #f1f4f6;
+}
+.tp-burger.is-open .tp-burger-line:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.tp-burger.is-open .tp-burger-line:nth-child(2) {
+  opacity: 0;
+}
+.tp-burger.is-open .tp-burger-line:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+/* header blends into the dark overlay while the menu is open */
+.tp-nav--menuopen {
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  color: #f1f4f6 !important;
+}
+.tp-nav--menuopen::before,
+.tp-nav--menuopen::after {
+  opacity: 0;
+}
+
+/* ---- Preloader: full-bleed on desktop, contained vertical stack on mobile ---- */
+.pl-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--paper);
+  height: 100dvh;
+  overflow: hidden;
+}
+.pl-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pl-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* portrait poster is mobile-only; hidden on desktop */
+.pl-poster-portrait {
+  display: none;
+}
+.pl-fallback {
+  width: 220px;
+  height: auto;
+}
+.pl-ripple {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 1px solid rgba(21, 194, 171, 0.6);
+  pointer-events: none;
+}
+.pl-sweep {
+  position: absolute;
+  inset: -20%;
+  opacity: 0;
+  mix-blend-mode: soft-light;
+  background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.85) 50%, transparent 58%);
+  pointer-events: none;
+}
+.pl-wordmark {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 16vh;
+  display: flex;
+  justify-content: center;
+  font-family: var(--font-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.pl-rail {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--accent);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+@media (max-width: 768px) {
+  /* Full-bleed: the portrait poster fills the whole viewport (may crop —
+     intended); wordmark + rail overlay on top, over a dark scrim. */
+  .pl-overlay {
+    display: block;
+    padding: 0;
+  }
+  .pl-stage {
+    position: absolute;
+    inset: 0;
+    display: flex; /* only centers the SVG fallback; the poster is absolute */
+    align-items: center;
+    justify-content: center;
+  }
+  /* landscape hidden on mobile; portrait poster is the full-bleed background */
+  .pl-poster {
+    display: none;
+  }
+  .pl-poster-portrait {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+    object-position: center;
+  }
+  /* graceful fallback: portrait missing → landscape, full-bleed cover */
+  .pl-portrait-missing .pl-poster {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  /* dark scrim (bottom-heavier) so the wordmark + bar read over any image */
+  .pl-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      rgba(6, 11, 20, 0.8),
+      rgba(6, 11, 20, 0.3) 38%,
+      rgba(6, 11, 20, 0.1) 68%,
+      transparent 100%
+    );
+  }
+  /* desktop centerpiece flourishes are not used on the full-bleed mobile view */
+  .pl-ripple,
+  .pl-sweep {
+    display: none;
+  }
+  .pl-fallback {
+    width: 60vw;
+    max-width: 60vw;
+    max-height: 40vh;
+  }
+  /* wordmark — lower third, centered, above image + scrim, light on dark */
+  .pl-wordmark {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 14vh;
+    z-index: 2;
+    color: #f1f4f6;
+  }
+  /* progress rail — bottom edge, full width, above the scrim */
+  .pl-rail {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+  }
+}
+
+/* full-screen dark-glass menu */
+.tp-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.6rem;
+  padding: 6rem var(--gutter) 3rem;
+  background: rgba(6, 11, 20, 0.92);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  backdrop-filter: blur(20px) saturate(120%);
+}
+.tp-menu-link {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 250;
+  font-size: clamp(28px, 7vw, 40px);
+  letter-spacing: -0.015em;
+  color: #f1f4f6;
+  text-decoration: none;
+  line-height: 1.25;
+}
+.tp-menu-link--active {
+  background: var(--accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tp-burger-line {
+    transition-duration: 0s;
+  }
+}
+
+/* link hover — a thin teal→indigo underline that animates in with a glow */
+.tp-navlink {
+  position: relative;
+}
+.tp-navlink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--teal), var(--indigo));
+  box-shadow: 0 0 6px rgba(21, 194, 171, 0.65);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s var(--ease);
+}
+@media (hover: hover) {
+  .tp-navlink:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+/* §2 Positioning bar — spacious vertical rhythm, larger on desktop. */
+.position-bar {
+  padding-block: 7rem;
+}
+@media (min-width: 768px) {
+  .position-bar {
+    padding-block: 14rem;
+  }
+}
+
+/* Generous, consistent vertical rhythm for the lower Home sections. */
+.section-pad {
+  padding-block: 5.5rem;
+}
+@media (min-width: 768px) {
+  .section-pad {
+    padding-block: 8rem;
+  }
+}
+
+/* §4 Journey — horizontal on desktop, stacked on mobile. */
+.journey-steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+.journey-line {
+  display: none;
+}
+@media (min-width: 768px) {
+  .journey-steps {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+  }
+  .journey-line {
+    display: block;
+  }
+}
+
+/* §5 Module portals — two dark cards. */
+.portal-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .portal-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.portal-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  background: var(--engine);
+  color: var(--engine-ink);
+  border-radius: 16px;
+  border-top: 2px solid transparent;
+  border-image: var(--accent) 1;
+  padding: 2.5rem 2.25rem;
+  text-decoration: none;
+  min-height: 280px;
+  transition:
+    transform 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
+}
+.portal-label {
+  font-family: var(--font-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  color: var(--teal);
+}
+.portal-title {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  letter-spacing: -0.01em;
+  color: var(--engine-ink);
+}
+.portal-line {
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--engine-ink-2);
+  max-width: 34ch;
+  margin-top: auto;
+}
+.portal-cta {
+  font-family: var(--font-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.74rem;
+  color: var(--engine-ink);
+  margin-top: 1.25rem;
+}
+.portal-arrow {
+  display: inline-block;
+  transition: transform 0.4s var(--ease);
+}
+@media (hover: hover) {
+  .portal-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 50px -12px rgba(21, 194, 171, 0.35);
+  }
+  .portal-card:hover .portal-arrow {
+    transform: translateX(6px);
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * /beschaffung — the dark "engine room"
+ * ------------------------------------------------------------------ */
+.bw-beat {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+.bw-graphic {
+  width: 100%;
+  max-width: 520px;
+  margin-inline: auto;
+}
+.bw-graphic svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+@media (min-width: 880px) {
+  .bw-beat {
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+  }
+  .bw-beat--reverse .bw-text {
+    order: 2;
+  }
+  .bw-beat--reverse .bw-graphic {
+    order: 1;
+  }
+  .bw-graphic {
+    margin-inline: 0;
+  }
 }

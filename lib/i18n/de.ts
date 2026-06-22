@@ -1,0 +1,303 @@
+import type { Dict } from "@/lib/i18n/dict";
+
+export const de: Dict = {
+  nav: {
+    cannabis: "Medizinisches Cannabis",
+    beschaffung: "Beschaffung",
+    kontakt: "Kontakt",
+    cta: "Apotheke anschließen",
+    menuOpen: "Menü öffnen",
+    menuClose: "Menü schließen",
+  },
+  hero: {
+    line1: "Alles dahinter.",
+    line2: "Eine Schiene.",
+    cta: "Apotheke anschließen",
+  },
+  position: {
+    suffix: "+",
+    countLabel: "angeschlossene Apotheken",
+    support: ["DEUTSCHLANDWEIT", "EIN SYSTEM", "20+ HERSTELLER"],
+    statement: "Die Infrastruktur, an der die Apotheken Deutschlands hängen.",
+  },
+  marquee: { eyebrow: "UNSERE PARTNER" },
+  testimonial: {
+    eyebrow: "STIMMEN AUS DEM NETZ",
+    quote:
+      "Trinity Pharma macht die komplette Apotheke startklar: Systeme, Beschaffung, Versorgung, Verstand — alles aus einer Hand. Ein Partner, auf den ich mich zu hundert Prozent verlassen kann.",
+    name: "Dott. Carlo Pirolo",
+    role: "Partnerapotheke",
+  },
+  journey: {
+    eyebrow: "SO LÄUFT DIE APOTHEKE MIT UNS",
+    headline: "Einmal angeschlossen, läuft alles über uns.",
+    steps: [
+      { n: "01", title: "Angeschlossen", desc: "Ihre Apotheke wird an das Trinity-System angebunden. Kein Aufwand auf Ihrer Seite." },
+      { n: "02", title: "Systeme aktiv", desc: "Bestellung, Beschaffung und Versand laufen ab Tag eins über unsere Systeme – vom Rx-Präparat bis zur Spezialanforderung." },
+      { n: "03", title: "Geschäft läuft", desc: "Beschaffung, Pick-up und Versand – über das gesamte Sortiment, automatisiert im Hintergrund." },
+      { n: "04", title: "Betreut", desc: "Onboarding, Reklamationen, Kundensupport – wir bleiben dahinter." },
+    ],
+  },
+  system: {
+    eyebrow: "EIN SYSTEM",
+    headline: "Eine geschlossene Infrastruktur. Alle Leistungen, alle verbunden.",
+    flagship: "FLAGSCHIFF",
+    close: "Schließen",
+    detailsSuffix: "— Details",
+  },
+  nodes: {
+    beschaffung: {
+      short: "Beschaffung",
+      metric: "Rx & Vollsortiment · 24/7",
+      title: "Beschaffung",
+      tag: "FLAGSCHIFF · 24/7 BUYER",
+      body: "Ihr ausgelagerter Einkaufsdesk – ein Zugang für Ihr komplettes Rx- und Vollsortiment. Bestellung, Beschaffung und Versand laufen vollautomatisch über unsere Systeme, ohne Aufwand auf Ihrer Seite.",
+      cta: "Anbindung starten →",
+    },
+    grosshandelserlaubnis: {
+      short: "Großhandelserlaubnis",
+      metric: "Beantragt & betrieben · §52a AMG",
+      title: "Großhandelserlaubnis",
+      tag: "KERNSTÜCK · §52A AMG",
+      body: "Ihre eigene Großhandelserlaubnis – ohne die Komplexität. Wir übernehmen den Antrag, stellen die verantwortliche Person (VP) und betreiben den GDP-konformen Großhandel, während Sie die Einkaufsvorteile nutzen.",
+      cta: "Erlaubnis prüfen lassen →",
+    },
+    konditionen: {
+      short: "Top-Konditionen",
+      metric: "5 Großhändler gebündelt",
+      title: "Top-Konditionen",
+      tag: "EINKAUF · GEBÜNDELT",
+      body: "Allein verhandelt jede Apotheke aus der schwachen Position. Über uns kaufen Sie zu den gebündelten Konditionen von fünf Großhändlern – bessere Einkaufspreise auf Ihr gesamtes Rx-Sortiment.",
+      cta: "Konditionen vergleichen →",
+    },
+    ssb: {
+      short: "SSB & Praxisbedarf",
+      metric: "Neue Rx-Umsätze · Arztpraxen",
+      title: "SSB & Praxisbedarf",
+      tag: "UMSATZ · ARZTPRAXEN",
+      body: "Sprechstundenbedarf als zusätzlicher Umsatzkanal – ohne Mehrarbeit in der Offizin. Wir wickeln Bestellung, Belieferung und Abrechnung mit den Praxen komplett über unser System ab.",
+      cta: "Praxisbedarf aktivieren →",
+    },
+    cannabis: {
+      short: "Cannabis",
+      metric: "500+ Sorten · 20+ Hersteller",
+      title: "Cannabis",
+      tag: "SORTIMENT · 500+ SORTEN",
+      body: "Die komplette Cannabis-Infrastruktur hinter Ihrer Apotheke – von der Pflanze bis zum Patienten. Über 500 Sorten von 20+ Herstellern, inklusive Import, Lagerung und Versand, GDP-konform.",
+      cta: "Sortiment ansehen →",
+    },
+    lieferengpass: {
+      short: "Lieferengpass-Management",
+      metric: "Sonderbeschaffung · Pharma-Buyer",
+      title: "Lieferengpass-Management",
+      tag: "VERFÜGBARKEIT · PHARMA-BUYER",
+      body: "Wenn der Großhandel nicht liefert, erhöhen wir Ihre Trefferquote. Aktive Sonderbeschaffung und Defektabwicklung über ein eigenes Buyer-Netzwerk – damit seltener ein Patient ohne Medikament dasteht.",
+      cta: "Engpass melden →",
+    },
+    fulfillment: {
+      short: "Versand & Fulfillment",
+      metric: "Pick-up bis Versand",
+      title: "Versand & Fulfillment",
+      tag: "LOGISTIK · GDP-KONFORM",
+      body: "Lager, Kommissionierung und Versand – komplett im Hintergrund, GDP-konform abgesichert. Pick-up bis Patient: temperaturgeführt, dokumentiert, nachverfolgbar.",
+      cta: "Ablauf ansehen →",
+    },
+    schnittstellen: {
+      short: "Schnittstellen",
+      metric: "MSV3 & Warenwirtschaft",
+      title: "Schnittstellen",
+      tag: "TECHNIK · MSV3",
+      body: "Vollautomatisch in Ihre Warenwirtschaft integriert – kein manueller Aufwand, keine Doppelpflege. MSV3-Anbindung verbindet Bestellung, Verfügbarkeit und Lieferstatus in Echtzeit.",
+      cta: "Integration ansehen →",
+    },
+  },
+  band: { line: "Alles, was Ihre Apotheke trägt." },
+  finale: {
+    statement: "Ein System. Alle Apotheken. Alles verbunden.",
+    cta: "Apotheke anschließen",
+  },
+  footer: {
+    kontakt: "Kontakt",
+    impressum: "Impressum",
+    datenschutz: "Datenschutz",
+    copyright: "© 2026 Trinity Pharma GmbH",
+  },
+  kontakt: {
+    eyebrow: "IHRE ANFRAGE",
+    fallback: {
+      ueberschrift: "Sprechen wir über Ihre Apotheke.",
+      untertitel: "Beschaffung, Großhandelserlaubnis, SSB, Cannabis – sagen Sie uns, worum es geht.",
+    },
+    form: {
+      name: "Name",
+      apotheke: "Apotheke / Unternehmen",
+      email: "E-Mail",
+      telefon: "Telefon",
+      betreff: "Betreff",
+      nachricht: "Nachricht",
+      namePh: "Vor- und Nachname",
+      apothekePh: "Name Ihrer Apotheke",
+      emailPh: "name@apotheke.de",
+      telefonPh: "Optional",
+      betreffPh: "Worum geht es?",
+      nachrichtPh: "Worum geht es konkret? (optional)",
+      submit: "Anfrage senden",
+      submitting: "Wird gesendet …",
+      required: "Bitte ausfüllen.",
+      emailInvalid: "Gültige E-Mail-Adresse angeben.",
+      successTitle: (vorname) => `Danke, ${vorname}.`,
+      successBody: (betreff) => `Ihre Anfrage zu „${betreff}“ ist bei uns. Wir melden uns innerhalb von 24 Stunden.`,
+      sendError: "Senden fehlgeschlagen. Bitte schreiben Sie uns direkt:",
+    },
+    trust: "Wir melden uns innerhalb von 24 Stunden. Keine Weitergabe Ihrer Daten.",
+    direct: {
+      eyebrow: "DIREKT",
+      telefon: "Telefon",
+      email: "E-Mail",
+      whatsapp: "WhatsApp",
+      whatsappCta: "Chat starten",
+      note: "Schreiben Sie uns jederzeit direkt — wir antworten kurzfristig.",
+    },
+  },
+  intents: {
+    beschaffung: {
+      ueberschrift: "Lassen Sie uns Ihre Apotheke anbinden.",
+      untertitel: "Ein Zugang für Ihr komplettes Sortiment – wir richten alles ein.",
+      betreff: "Anbindung & Beschaffung",
+    },
+    grosshandelserlaubnis: {
+      ueberschrift: "Wir prüfen Ihre Großhandelserlaubnis – kostenlos.",
+      untertitel: "§52a AMG, verantwortliche Person, GDP – wir übernehmen den kompletten Weg.",
+      betreff: "Großhandelserlaubnis (§52a)",
+    },
+    konditionen: {
+      ueberschrift: "Sehen Sie, wie viel besser Sie einkaufen könnten.",
+      untertitel: "Gebündelte Konditionen von fünf Großhändlern auf Ihr Rx-Sortiment.",
+      betreff: "Top-Konditionen",
+    },
+    ssb: {
+      ueberschrift: "Erschließen Sie SSB als neuen Umsatzkanal.",
+      untertitel: "Sprechstundenbedarf – komplett über uns abgewickelt, ohne Mehrarbeit.",
+      betreff: "SSB & Praxisbedarf",
+    },
+    cannabis: {
+      ueberschrift: "Bringen Sie die komplette Cannabis-Infrastruktur in Ihre Apotheke.",
+      untertitel: "500+ Sorten, 20+ Hersteller – Import, Lagerung und Versand inklusive.",
+      betreff: "Medizinisches Cannabis",
+    },
+    lieferengpass: {
+      ueberschrift: "Welches Präparat fehlt Ihnen gerade?",
+      untertitel: "Aktive Sonderbeschaffung über unser Buyer-Netzwerk – wir erhöhen Ihre Trefferquote.",
+      betreff: "Lieferengpass-Management",
+    },
+    fulfillment: {
+      ueberschrift: "So läuft Versand & Fulfillment über uns.",
+      untertitel: "Lager, Kommissionierung und Versand – GDP-konform im Hintergrund.",
+      betreff: "Versand & Fulfillment",
+    },
+    schnittstellen: {
+      ueberschrift: "Verbinden Sie Trinity mit Ihrer Warenwirtschaft.",
+      untertitel: "MSV3-Anbindung – Bestellung, Verfügbarkeit und Lieferstatus in Echtzeit.",
+      betreff: "Schnittstellen (MSV3)",
+    },
+  },
+  cannabis: {
+    beats: [
+      { eyebrow: "01 — DIE PFLANZE", headline: "EU-GMP-zertifiziert. Pharmazeutische Qualität.", accentWord: "Qualität.", subtext: "Geprüfte Blüten von über 20 Herstellern — lückenlos dokumentiert.", metricLabel: "Hersteller" },
+      { eyebrow: "02 — DIE SORTEN", headline: "Das ganze Spektrum. THC bis CBD.", accentWord: "Spektrum.", subtext: "Über 500 Sorten, kuratiert für jede Indikation.", metricLabel: "Sorten" },
+      { eyebrow: "03 — IHRE APOTHEKE", headline: "Deutschlandweit angeschlossen.", accentWord: "angeschlossen.", subtext: "Vom Versandhandel bis zur A-Lage — Ihre Apotheke im Netz.", metricLabel: "Apotheken" },
+      { eyebrow: "04 — DAS REZEPT", headline: "Vom Telemediziner zum E-Rezept.", accentWord: "E-Rezept.", subtext: "Anbindung an Telemedizin-Plattformen — das Rezept kommt zu Ihnen.", metricLabel: "" },
+      { eyebrow: "05 — ZUM PATIENTEN", headline: "Abholung, Versand, Lieferung.", accentWord: "Lieferung.", subtext: "Pick-up, DHL, Uber, Lieferando — der Patient wählt.", metricLabel: "" },
+      { eyebrow: "06 — DAHINTER", headline: "Eigene Systeme. Eine Schiene.", accentWord: "Schiene.", subtext: "Alles verbunden — von der Pflanze bis zum Patienten.", metricLabel: "" },
+    ],
+    endLine: "Bringen Sie diese Infrastruktur in Ihre Apotheke.",
+    endCta: "Apotheke anschließen",
+  },
+  legal: {
+    nonBinding: "",
+    impressum: {
+      eyebrow: "IMPRESSUM",
+      headline: "Impressum",
+      section5: "Angaben gemäß § 5 TMG",
+      company: "Trinity Pharma GmbH",
+      address: "Chausseestraße 37, 10115 Berlin",
+      country: "Deutschland",
+      vertretenLabel: "Vertreten durch",
+      vertreten: "Geschäftsführer Thomas Marcinek, Rico Abenayake",
+      kontaktLabel: "Kontakt",
+      kontaktEmail: "T.m@trinity-pharma.de",
+      registerLabel: "Registereintrag",
+      register: "Handelsregister, Amtsgericht Berlin (Charlottenburg), Registernummer: –",
+      ustLabel: "Umsatzsteuer-ID",
+      ust: "gemäß § 27a UStG: –",
+      verantwortlichLabel: "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV",
+      verantwortlich: "Thomas Marcinek, Chausseestraße 37, 10115 Berlin",
+      haftungLabel: "Haftungsausschluss",
+      haftung:
+        "Die Inhalte dieser Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.",
+    },
+    datenschutz: {
+      eyebrow: "DATENSCHUTZ",
+      headline: "Datenschutzerklärung",
+      sections: [
+        {
+          heading: "1. Verantwortlicher",
+          body: [
+            "Trinity Pharma GmbH, Chausseestraße 37, 10115 Berlin, Deutschland.",
+            "E-Mail: T.m@trinity-pharma.de",
+          ],
+        },
+        {
+          heading: "2. Erhebung und Speicherung personenbezogener Daten",
+          body: [
+            "Beim Aufruf dieser Website werden durch den Hosting-Provider automatisch Informationen in sogenannten Server-Logfiles erhoben und gespeichert, die Ihr Browser automatisch übermittelt. Dies sind: Browsertyp und -version, verwendetes Betriebssystem, Referrer-URL, Hostname des zugreifenden Rechners, Uhrzeit der Serveranfrage sowie die IP-Adresse.",
+            "Diese Daten werden nicht mit anderen Datenquellen zusammengeführt. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO zur Gewährleistung eines reibungslosen Verbindungsaufbaus, einer komfortablen Nutzung der Website sowie zur Auswertung der Systemsicherheit und -stabilität.",
+          ],
+        },
+        {
+          heading: "3. Kontaktformular",
+          body: [
+            "Wenn Sie uns über das Kontaktformular kontaktieren, verarbeiten wir die von Ihnen angegebenen Daten — Name, Apotheke/Unternehmen, E-Mail-Adresse, optional Telefonnummer, Betreff und Ihre Nachricht — ausschließlich zur Bearbeitung Ihrer Anfrage und für etwaige Anschlussfragen. Diese Daten geben wir nicht ohne Ihre Einwilligung an Dritte weiter. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) sowie Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bearbeitung Ihrer Anfrage).",
+          ],
+        },
+        {
+          heading: "4. Cookies",
+          body: [
+            "Diese Website verwendet ausschließlich technisch notwendige Cookies, die für den Betrieb der Seite erforderlich sind. Es werden keine Analyse- oder Tracking-Cookies und keine Cookies zu Marketingzwecken gesetzt. Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden; bei Deaktivierung technischer Cookies kann die Funktionalität der Website eingeschränkt sein.",
+          ],
+        },
+        {
+          heading: "5. Hosting",
+          body: [
+            "Diese Website wird bei Vercel Inc. (340 S Lemon Ave #4133, Walnut, CA 91789, USA) gehostet. Beim Aufruf der Website verarbeitet Vercel technische Zugriffsdaten (z. B. IP-Adresse, Server-Logfiles) zur Auslieferung der Inhalte. Dabei kann eine Übermittlung in die USA stattfinden. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; die Datenübermittlung erfolgt auf Grundlage geeigneter Garantien (EU-Standardvertragsklauseln).",
+          ],
+        },
+        {
+          heading: "6. Ihre Rechte",
+          body: ["Sie haben jederzeit das Recht auf:"],
+          bullets: [
+            "Auskunft über Ihre verarbeiteten personenbezogenen Daten (Art. 15 DSGVO)",
+            "Berichtigung unrichtiger oder unvollständiger Daten (Art. 16 DSGVO)",
+            "Löschung Ihrer bei uns gespeicherten Daten (Art. 17 DSGVO)",
+            "Einschränkung der Datenverarbeitung (Art. 18 DSGVO)",
+            "Datenübertragbarkeit (Art. 20 DSGVO)",
+            "Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)",
+          ],
+        },
+        {
+          heading: "7. Beschwerderecht",
+          body: [
+            "Ihnen steht das Recht zu, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten durch uns zu beschweren. Zuständig ist die Berliner Beauftragte für Datenschutz und Informationsfreiheit.",
+          ],
+        },
+        {
+          heading: "8. SSL-Verschlüsselung",
+          body: [
+            "Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://“ auf „https://“ wechselt und am Schloss-Symbol in Ihrer Browserzeile.",
+          ],
+        },
+      ],
+    },
+  },
+  langToggle: { de: "DE", en: "EN", label: "Sprache" },
+};

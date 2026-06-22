@@ -1,0 +1,303 @@
+import type { Dict } from "@/lib/i18n/dict";
+
+export const en: Dict = {
+  nav: {
+    cannabis: "Medical Cannabis",
+    beschaffung: "Procurement",
+    kontakt: "Contact",
+    cta: "Connect your pharmacy",
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
+  },
+  hero: {
+    line1: "Everything behind it.",
+    line2: "One rail.",
+    cta: "Connect your pharmacy",
+  },
+  position: {
+    suffix: "+",
+    countLabel: "connected pharmacies",
+    support: ["NATIONWIDE", "ONE SYSTEM", "20+ MANUFACTURERS"],
+    statement: "The infrastructure Germany's pharmacies run on.",
+  },
+  marquee: { eyebrow: "OUR PARTNERS" },
+  testimonial: {
+    eyebrow: "VOICES FROM THE NETWORK",
+    quote:
+      "Trinity Pharma gets the entire pharmacy ready to go: systems, procurement, supply, know-how — all from one source. A partner I can rely on one hundred percent.",
+    name: "Dott. Carlo Pirolo",
+    role: "Partner pharmacy",
+  },
+  journey: {
+    eyebrow: "HOW YOUR PHARMACY RUNS WITH US",
+    headline: "Connect once — everything runs through us.",
+    steps: [
+      { n: "01", title: "Connected", desc: "Your pharmacy is connected to the Trinity system. Nothing for you to do." },
+      { n: "02", title: "Systems live", desc: "Ordering, procurement and shipping run through our systems from day one – from Rx product to special request." },
+      { n: "03", title: "Business runs", desc: "Procurement, pick-up and shipping – across your entire range, automated in the background." },
+      { n: "04", title: "Supported", desc: "Onboarding, complaints, customer support – we stay behind it." },
+    ],
+  },
+  system: {
+    eyebrow: "ONE SYSTEM",
+    headline: "One closed infrastructure. Every service, all connected.",
+    flagship: "FLAGSHIP",
+    close: "Close",
+    detailsSuffix: "— details",
+  },
+  nodes: {
+    beschaffung: {
+      short: "Procurement",
+      metric: "Rx & full range · 24/7",
+      title: "Procurement",
+      tag: "FLAGSHIP · 24/7 BUYER",
+      body: "Your outsourced purchasing desk – one point of access for your complete Rx and full range. Ordering, procurement and shipping run fully automatically through our systems, with no effort on your side.",
+      cta: "Start connecting →",
+    },
+    grosshandelserlaubnis: {
+      short: "Wholesale licence",
+      metric: "Filed & operated · §52a AMG",
+      title: "Wholesale licence",
+      tag: "CORNERSTONE · §52A AMG",
+      body: "Your own wholesale licence – without the complexity. We handle the application, provide the responsible person (RP) and operate the GDP-compliant wholesale business, while you reap the purchasing advantages.",
+      cta: "Have your licence reviewed →",
+    },
+    konditionen: {
+      short: "Top conditions",
+      metric: "5 wholesalers, bundled",
+      title: "Top conditions",
+      tag: "PURCHASING · BUNDLED",
+      body: "On its own, every pharmacy negotiates from a weak position. Through us, you buy at the bundled conditions of five wholesalers – better purchasing prices across your entire Rx range.",
+      cta: "Compare conditions →",
+    },
+    ssb: {
+      short: "SSB & practice supply",
+      metric: "New Rx revenue · medical practices",
+      title: "SSB & practice supply",
+      tag: "REVENUE · MEDICAL PRACTICES",
+      body: "Sprechstundenbedarf (SSB) as an additional revenue channel – without extra work at the counter. We handle ordering, delivery and billing with the practices entirely through our system.",
+      cta: "Activate practice supply →",
+    },
+    cannabis: {
+      short: "Cannabis",
+      metric: "500+ strains · 20+ manufacturers",
+      title: "Cannabis",
+      tag: "RANGE · 500+ STRAINS",
+      body: "The complete cannabis infrastructure behind your pharmacy – from plant to patient. Over 500 strains from 20+ manufacturers, including import, storage and shipping, GDP-compliant.",
+      cta: "Explore the range →",
+    },
+    lieferengpass: {
+      short: "Supply-shortage management",
+      metric: "Special procurement · pharma buyers",
+      title: "Supply-shortage management",
+      tag: "AVAILABILITY · PHARMA BUYER",
+      body: "When the wholesaler can't deliver, we raise your hit rate. Active special procurement and shortage handling through our own buyer network – so a patient is left without medication less often.",
+      cta: "Report a shortage →",
+    },
+    fulfillment: {
+      short: "Shipping & fulfilment",
+      metric: "Pick-up to shipping",
+      title: "Shipping & fulfilment",
+      tag: "LOGISTICS · GDP-COMPLIANT",
+      body: "Warehousing, picking and shipping – entirely in the background, GDP-compliant and secured. Pick-up to patient: temperature-controlled, documented, traceable.",
+      cta: "See how it works →",
+    },
+    schnittstellen: {
+      short: "Interfaces",
+      metric: "MSV3 & merchandise management",
+      title: "Interfaces",
+      tag: "TECHNOLOGY · MSV3",
+      body: "Fully integrated into your merchandise management system – no manual effort, no double entry. The MSV3 connection links ordering, availability and delivery status in real time.",
+      cta: "See the integration →",
+    },
+  },
+  band: { line: "Everything your pharmacy stands on." },
+  finale: {
+    statement: "One system. Every pharmacy. All connected.",
+    cta: "Connect your pharmacy",
+  },
+  footer: {
+    kontakt: "Contact",
+    impressum: "Imprint",
+    datenschutz: "Privacy",
+    copyright: "© 2026 Trinity Pharma GmbH",
+  },
+  kontakt: {
+    eyebrow: "YOUR ENQUIRY",
+    fallback: {
+      ueberschrift: "Let's talk about your pharmacy.",
+      untertitel: "Procurement, wholesale licence, SSB, cannabis – tell us what it's about.",
+    },
+    form: {
+      name: "Name",
+      apotheke: "Pharmacy / Company",
+      email: "Email",
+      telefon: "Phone",
+      betreff: "Subject",
+      nachricht: "Message",
+      namePh: "First and last name",
+      apothekePh: "Your pharmacy's name",
+      emailPh: "name@pharmacy.de",
+      telefonPh: "Optional",
+      betreffPh: "What's it about?",
+      nachrichtPh: "What exactly is it about? (optional)",
+      submit: "Send enquiry",
+      submitting: "Sending …",
+      required: "Please complete this field.",
+      emailInvalid: "Enter a valid email address.",
+      successTitle: (vorname) => `Thank you, ${vorname}.`,
+      successBody: (betreff) => `Your enquiry about “${betreff}” has reached us. We'll be in touch within 24 hours.`,
+      sendError: "Sending failed. Please email us directly:",
+    },
+    trust: "We'll be in touch within 24 hours. Your data is never shared.",
+    direct: {
+      eyebrow: "DIRECT",
+      telefon: "Phone",
+      email: "Email",
+      whatsapp: "WhatsApp",
+      whatsappCta: "Start chat",
+      note: "Write to us directly any time — we respond promptly.",
+    },
+  },
+  intents: {
+    beschaffung: {
+      ueberschrift: "Let's connect your pharmacy.",
+      untertitel: "One point of access for your complete range – we set it all up.",
+      betreff: "Connection & procurement",
+    },
+    grosshandelserlaubnis: {
+      ueberschrift: "We'll review your wholesale licence – free of charge.",
+      untertitel: "§52a AMG, responsible person, GDP – we handle the entire path.",
+      betreff: "Wholesale licence (§52a)",
+    },
+    konditionen: {
+      ueberschrift: "See how much better you could be buying.",
+      untertitel: "Bundled conditions from five wholesalers on your Rx range.",
+      betreff: "Top conditions",
+    },
+    ssb: {
+      ueberschrift: "Open up SSB as a new revenue channel.",
+      untertitel: "Sprechstundenbedarf – handled entirely by us, with no extra work.",
+      betreff: "SSB & practice supply",
+    },
+    cannabis: {
+      ueberschrift: "Bring the complete cannabis infrastructure into your pharmacy.",
+      untertitel: "500+ strains, 20+ manufacturers – import, storage and shipping included.",
+      betreff: "Medical Cannabis",
+    },
+    lieferengpass: {
+      ueberschrift: "Which product are you missing right now?",
+      untertitel: "Active special procurement through our buyer network – we raise your hit rate.",
+      betreff: "Supply-shortage management",
+    },
+    fulfillment: {
+      ueberschrift: "Here's how shipping & fulfilment run through us.",
+      untertitel: "Warehousing, picking and shipping – GDP-compliant, in the background.",
+      betreff: "Shipping & fulfilment",
+    },
+    schnittstellen: {
+      ueberschrift: "Connect Trinity to your merchandise management.",
+      untertitel: "MSV3 connection – ordering, availability and delivery status in real time.",
+      betreff: "Interfaces (MSV3)",
+    },
+  },
+  cannabis: {
+    beats: [
+      { eyebrow: "01 — THE PLANT", headline: "EU-GMP-certified. Pharmaceutical quality.", accentWord: "quality.", subtext: "Tested flower from over 20 manufacturers — fully documented.", metricLabel: "manufacturers" },
+      { eyebrow: "02 — THE STRAINS", headline: "The full spectrum. THC to CBD.", accentWord: "spectrum.", subtext: "Over 500 strains, curated for every indication.", metricLabel: "strains" },
+      { eyebrow: "03 — YOUR PHARMACY", headline: "Connected nationwide.", accentWord: "nationwide.", subtext: "From mail-order to prime location — your pharmacy on the network.", metricLabel: "pharmacies" },
+      { eyebrow: "04 — THE PRESCRIPTION", headline: "From telemedicine to e-prescription.", accentWord: "e-prescription.", subtext: "Connected to telemedicine platforms — the prescription comes to you.", metricLabel: "" },
+      { eyebrow: "05 — TO THE PATIENT", headline: "Pick-up, dispatch, delivery.", accentWord: "delivery.", subtext: "Pick-up, DHL, Uber, Lieferando — the patient chooses.", metricLabel: "" },
+      { eyebrow: "06 — BEHIND IT", headline: "Our own systems. One rail.", accentWord: "rail.", subtext: "All connected — from plant to patient.", metricLabel: "" },
+    ],
+    endLine: "Bring this infrastructure into your pharmacy.",
+    endCta: "Connect your pharmacy",
+  },
+  legal: {
+    nonBinding: "This is a non-binding English translation. The German version is legally authoritative.",
+    impressum: {
+      eyebrow: "IMPRINT",
+      headline: "Imprint",
+      section5: "Information pursuant to § 5 TMG",
+      company: "Trinity Pharma GmbH",
+      address: "Chausseestraße 37, 10115 Berlin",
+      country: "Germany",
+      vertretenLabel: "Represented by",
+      vertreten: "Managing Directors Thomas Marcinek, Rico Abenayake",
+      kontaktLabel: "Contact",
+      kontaktEmail: "T.m@trinity-pharma.de",
+      registerLabel: "Register entry",
+      register: "Commercial register, Local Court of Berlin (Charlottenburg), registration number: –",
+      ustLabel: "VAT ID",
+      ust: "pursuant to § 27a UStG: –",
+      verantwortlichLabel: "Responsible for content pursuant to § 18 (2) MStV",
+      verantwortlich: "Thomas Marcinek, Chausseestraße 37, 10115 Berlin",
+      haftungLabel: "Disclaimer",
+      haftung:
+        "The contents of these pages were created with the utmost care. However, we cannot guarantee the accuracy, completeness or timeliness of the content.",
+    },
+    datenschutz: {
+      eyebrow: "PRIVACY",
+      headline: "Privacy Policy",
+      sections: [
+        {
+          heading: "1. Controller",
+          body: [
+            "Trinity Pharma GmbH, Chausseestraße 37, 10115 Berlin, Germany.",
+            "Email: T.m@trinity-pharma.de",
+          ],
+        },
+        {
+          heading: "2. Collection and storage of personal data",
+          body: [
+            "When you access this website, the hosting provider automatically collects and stores information in so-called server log files, which your browser transmits automatically. These are: browser type and version, operating system used, referrer URL, hostname of the accessing computer, time of the server request and the IP address.",
+            "This data is not merged with other data sources. Processing is carried out on the basis of Art. 6 (1) (f) GDPR to ensure a smooth connection, a convenient use of the website, and to evaluate system security and stability.",
+          ],
+        },
+        {
+          heading: "3. Contact form",
+          body: [
+            "When you contact us via the contact form, we process the data you provide — name, pharmacy/company, email address, optionally phone number, subject and your message — solely to handle your enquiry and any follow-up questions. We do not share this data with third parties without your consent. Legal basis: Art. 6 (1) (b) GDPR (pre-contractual measures) and Art. 6 (1) (f) GDPR (legitimate interest in handling your enquiry).",
+          ],
+        },
+        {
+          heading: "4. Cookies",
+          body: [
+            "This website uses exclusively technically necessary cookies that are required to operate the site. No analytics or tracking cookies and no cookies for marketing purposes are set. You can configure your browser to inform you about the setting of cookies; if technically necessary cookies are disabled, the functionality of the website may be limited.",
+          ],
+        },
+        {
+          heading: "5. Hosting",
+          body: [
+            "This website is hosted by Vercel Inc. (340 S Lemon Ave #4133, Walnut, CA 91789, USA). When the website is accessed, Vercel processes technical access data (e.g. IP address, server log files) to deliver the content. This may involve a transfer to the USA. The legal basis is Art. 6 (1) (f) GDPR; the data transfer is carried out on the basis of appropriate safeguards (EU Standard Contractual Clauses).",
+          ],
+        },
+        {
+          heading: "6. Your rights",
+          body: ["You have the right at any time to:"],
+          bullets: [
+            "access to your processed personal data (Art. 15 GDPR)",
+            "rectification of inaccurate or incomplete data (Art. 16 GDPR)",
+            "erasure of the data stored by us (Art. 17 GDPR)",
+            "restriction of processing (Art. 18 GDPR)",
+            "data portability (Art. 20 GDPR)",
+            "objection to processing (Art. 21 GDPR)",
+          ],
+        },
+        {
+          heading: "7. Right to lodge a complaint",
+          body: [
+            "You have the right to lodge a complaint with a data protection supervisory authority about our processing of your personal data. The competent authority is the Berlin Commissioner for Data Protection and Freedom of Information (Berliner Beauftragte für Datenschutz und Informationsfreiheit).",
+          ],
+        },
+        {
+          heading: "8. SSL encryption",
+          body: [
+            "For security reasons and to protect the transmission of confidential content, this site uses SSL/TLS encryption. You can recognise an encrypted connection by the browser's address bar changing from “http://” to “https://” and by the padlock symbol in your browser bar.",
+          ],
+        },
+      ],
+    },
+  },
+  langToggle: { de: "DE", en: "EN", label: "Sprache / Language" },
+};
